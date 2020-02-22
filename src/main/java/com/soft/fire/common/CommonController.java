@@ -24,6 +24,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 public class CommonController {
+
     /**
      * 日志操作对象
      */
@@ -92,4 +93,6 @@ public class CommonController {
         result.put("msg", "保存成功");
         return result;
     }
+
+
 }

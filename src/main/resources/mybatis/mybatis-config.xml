@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 全局配置setting,根据需要进行配置 -->
+    <settings>
+
+        <!-- 全局映射器启用缓存 -->
+        <setting name="cacheEnabled"     value="true" />
+        <!-- 允许 JDBC 支持自动生成主键 -->
+        <setting name="useGeneratedKeys"   value="true" />
+        <!--配置默认的执行器。SIMPLE 就是普通的执行器；REUSE 执行器会重用预处理语句（prepared statements）；-->
+        <!--# BATCH 执行器将重用语句并执行批量更新。-->
+        <setting name="defaultExecutorType"    value="REUSE" />
+
+        <!--要使延迟加载生效必须配置下面两个属性-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+
+    </settings>
+
+</configuration>

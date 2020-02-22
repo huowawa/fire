@@ -55,4 +55,8 @@ public class Emp {
      * 所在部门编号
      */
     private int deptno;
+    /**
+     * 员工地址
+     */
+    private String empAddress;
 }

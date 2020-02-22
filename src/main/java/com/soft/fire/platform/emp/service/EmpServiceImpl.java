@@ -3,13 +3,13 @@
  */
 package com.soft.fire.platform.emp.service;
 
-import com.soft.fire.platform.emp.dao.EmpDao;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.soft.fire.platform.emp.mapper.EmpMapper;
 import com.soft.fire.platform.emp.model.Emp;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 雇员业务操作实现类
@@ -19,60 +19,21 @@ import java.util.Map;
  * @date 2019-03-17 11:28
  */
 @Service("empService")
-public class EmpServiceImpl implements  EmpService {
+public class EmpServiceImpl extends ServiceImpl<EmpMapper,Emp> implements  EmpService {
     /**
      * 注入dao依赖
      */
     @Resource
-    private EmpDao empDao;
+    private EmpMapper empMapper;
 
-    /**
-     * 根据名称 获取雇员信息
-     *
-     * @param ename
-     * @return
-     */
-    @Override
-    public Map<String,Object> getEmpByName(String ename)  {
-      return empDao.getEmpByName(ename);
-    }
-
-    @Override
-    public Emp getEmpByNo(String empno) {
-        return empDao.getEmpByNo(empno);
-    }
-
-    /**
-     * 获取任务
-     *
-     * @param exeId
-     * @return
-     */
-    @Override
-    public List<Map<String, Object>> findTaskByExeId(String exeId) {
-        return empDao.findTaskByExeId(exeId);
-    }
-
-    /**
-     * 获取所有职员信息
-     *
-     * @return
-     */
     @Override
     public List<Emp> findAllEmp() {
-        return empDao.findAllEmp();
+        List<Emp> empList = empMapper.selectList(null);
+        return empList;
     }
 
     @Override
-  //  @Transactional
-    public void removeEmp(Integer empno) {
-      empDao.removeEmp(empno);
+    public Emp getByEmpno(String empno) {
+        return empMapper.getByEmpno(empno);
     }
-
-    //@Transactional
-    @Override
-    public int saveEmp(Emp emp) {
-        return empDao.saveEmp(emp);
-    }
-
 }
