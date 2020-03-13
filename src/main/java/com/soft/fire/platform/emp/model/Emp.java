@@ -3,6 +3,7 @@
  */
 package com.soft.fire.platform.emp.model;
 
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,15 +21,19 @@ import java.sql.Timestamp;
 @Setter
 @Getter
 @ToString
+@TableName("EMP")
+@KeySequence("EMP_SEQUENCE")
 public class Emp {
     /**
      * 员工编号
      */
-    private int empno;
+    @TableId(type = IdType.INPUT)
+    private Long empno;
     /**
      * 员工姓名
      */
-    private String  ename;
+    @TableField("ename")
+    private String empname;
     /**
      * 工作岗位
      */
@@ -36,16 +41,17 @@ public class Emp {
     /**
      * 领导者编号
      */
-    private int mgr ;
+    private int mgr;
     /**
      * 入职时间
      * 自定义输出格式
      */
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp hiredate;
     /**
-     * 薪水
+     * 薪水  查询的时候不返回这个字段值
      */
+    @TableField(select = false)
     private double sal;
     /**
      * 奖金
@@ -56,7 +62,9 @@ public class Emp {
      */
     private int deptno;
     /**
-     * 员工地址
+     * 地址
      */
+    @TableField(exist = false)
     private String empAddress;
+
 }

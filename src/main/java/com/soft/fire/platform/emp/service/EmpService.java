@@ -29,4 +29,25 @@ public interface EmpService extends IService<Emp> {
      * @return
      */
     Emp getByEmpno(String empno);
+
+    /**
+     * 保存雇员信息
+     * @param emp
+     * @return
+     */
+    int saveEmp(Emp emp);
+
+    /**
+     * 修改雇员信息
+     * @param emp
+     * @return
+     */
+    int updateEmp(Emp emp);
+
+    /**
+     * 删除雇员信息
+     * @param emp
+     * @return
+     */
+    int removeEmp(Emp emp);
 }

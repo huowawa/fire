@@ -19,7 +19,7 @@ import java.util.List;
  * @date 2019-03-17 11:28
  */
 @Service("empService")
-public class EmpServiceImpl extends ServiceImpl<EmpMapper,Emp> implements  EmpService {
+public class EmpServiceImpl extends ServiceImpl<EmpMapper, Emp> implements EmpService {
     /**
      * 注入dao依赖
      */
@@ -36,4 +36,21 @@ public class EmpServiceImpl extends ServiceImpl<EmpMapper,Emp> implements  EmpSe
     public Emp getByEmpno(String empno) {
         return empMapper.getByEmpno(empno);
     }
+
+    @Override
+    public int saveEmp(Emp emp) {
+        return empMapper.insert(emp);
+    }
+
+    @Override
+    public int updateEmp(Emp emp) {
+
+        return empMapper.updateById(emp);
+    }
+
+    @Override
+    public int removeEmp(Emp emp) {
+        return empMapper.deleteById(emp.getEmpno());
+    }
+
 }

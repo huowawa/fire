@@ -73,6 +73,18 @@
         </dependency>
 
         <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.30</version>
+        </dependency>
+
+        <dependency>
             <!--依赖阿里巴巴的Druid数据源-->
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
