@@ -1,10 +1,14 @@
 package ${package.ServiceImpl};
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 import org.springframework.stereotype.Service;
+import com.soft.fire.common.SqlFilter;
 import javax.annotation.Resource;
 
 /**
@@ -28,6 +32,11 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
      */
     @Resource
     private ${table.mapperName}  ${table.mapperName?uncap_first};
+
+    @Override
+    public IPage<${entity}> findBySqlFilter(SqlFilter sqlFilter) {
+          return null;
+    }
 
 }
 </#if>

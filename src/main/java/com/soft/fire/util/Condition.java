@@ -34,7 +34,12 @@ public class Condition {
         orderParams.forEach((k, v) -> {
             OrderItem orderItem = new OrderItem();
             orderItem.setColumn(k);
-            orderItem.setAsc(false);
+            if(v.toUpperCase().equals("ASC")){
+                orderItem.setAsc(true);
+            }else{
+                orderItem.setAsc(false);
+            }
+
             orderItems.add(orderItem);
         });
         myPage.setOrders(orderItems);

@@ -1,11 +1,12 @@
 /*
  * Copyright (c)
  */
-package com.soft.fire.util;
+package com.soft.fire.common;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.soft.fire.common.MyPage;
+import com.soft.fire.util.Condition;
+import com.soft.fire.util.PlatStringUtil;
+import com.soft.fire.util.SqlKeyword;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -41,6 +42,14 @@ public class SqlFilter<T> {
      * 分页工具
      */
     private MyPage<T> myPage = null;
+    /**
+     * 当前页面 第1页
+     */
+    private Long current = 1L;
+    /**
+     * 每页显示的条数
+     */
+    private Long size = 10L;
     /**
      * 查询参数
      */
@@ -113,7 +122,7 @@ public class SqlFilter<T> {
             Map.Entry<String, Object> entry = (Map.Entry<String, Object>) it.next();
             String fieldName = entry.getKey();
             Object val = entry.getValue();
-            if (val != null && StringUtil.isNotBlank(val.toString())) {
+            if (val != null && PlatStringUtil.isNotBlank(val.toString())) {
                 if (fieldName.startsWith("Q_")) {
                     //获取最后一个操作符
                     this.addFilter(fieldName, val.toString().trim(), 1);
@@ -127,17 +136,18 @@ public class SqlFilter<T> {
         /**
          * 构造完成之后 生成分页对象  和查询封装
          */
-        Integer limit = MyPage.DEFAULT_PAGE_SIZE;
         // 获取当前页
         String currentPage = (String) sqlParams.get("current");
         String s_limit = (String) sqlParams.get("limit");
-        if (StringUtil.isNotBlank(s_limit)) {
-            this.myPage = Condition.getPage(Long.valueOf(currentPage), Long.valueOf(s_limit),this.orderParams);
-        } else {
-            this.myPage = Condition.getPage(Long.valueOf(1), Long.valueOf(limit),this.orderParams);
+        if (PlatStringUtil.isNotBlank(s_limit)&& PlatStringUtil.isNotBlank(currentPage)) {
+            this.current = Long.valueOf(currentPage);
+            this.size = Long.valueOf(s_limit);
+
         }
 
-        SqlKeyword.buildCondition(this.queryParams,this.queryWrapper);
+       // this.myPage = Condition.getPage(this.current, this.size,this.orderParams);
+
+        //SqlKeyword.buildCondition(this.queryParams,this.queryWrapper);
         //this.qw = Condition.getQueryWrapper(this.queryParams,null,null);
 
     }
@@ -172,7 +182,7 @@ public class SqlFilter<T> {
             String key = (String) entry.getKey();
             String[] val = (String[]) entry.getValue();
             if (val.length == 1) {
-                if (StringUtil.isNotBlank(val[0])) {
+                if (PlatStringUtil.isNotBlank(val[0])) {
                     datas.put(key, val[0]);
                 } else {
                     datas.put(key, "");
@@ -188,11 +198,45 @@ public class SqlFilter<T> {
         return datas;
     }
 
+    /**
+     * 获取分页对象
+     * @return
+     */
     public MyPage<T> getMyPage() {
+        this.myPage = Condition.getPage(this.current, this.size,this.orderParams);
         return myPage;
     }
 
+    /**
+     * 获取查询条件包装器
+     * @return
+     */
     public QueryWrapper<?> getQueryWrapper() {
+        SqlKeyword.buildCondition(this.queryParams,this.queryWrapper);
         return queryWrapper;
+    }
+
+    public Long getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Long current) {
+        this.current = current;
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
+    }
+
+    public Map<String, Object> getQueryParams() {
+        return queryParams;
+    }
+
+    public void setQueryParams(Map<String, Object> queryParams) {
+        this.queryParams = queryParams;
     }
 }

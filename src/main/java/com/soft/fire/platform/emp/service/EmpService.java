@@ -6,7 +6,7 @@ package com.soft.fire.platform.emp.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft.fire.platform.emp.model.Emp;
-import com.soft.fire.util.SqlFilter;
+import com.soft.fire.common.SqlFilter;
 
 import java.util.List;
 import java.util.Map;
@@ -59,6 +59,11 @@ public interface EmpService extends IService<Emp> {
      */
     IPage<Emp> selectPage();
 
+    /**
+     * 分页查询
+     * @param sqlFilter
+     * @return
+     */
     IPage<Emp> findBySqlFilter(SqlFilter sqlFilter);
 
 }

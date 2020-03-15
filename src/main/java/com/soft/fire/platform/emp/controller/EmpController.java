@@ -8,8 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.soft.fire.platform.emp.model.Emp;
 import com.soft.fire.platform.emp.service.EmpService;
-import com.soft.fire.util.SqlFilter;
-import com.soft.fire.util.StringUtil;
+import com.soft.fire.common.SqlFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -117,6 +116,7 @@ public class EmpController {
     @RequestMapping("/pages")
     public IPage<Emp>  selectPage(HttpServletRequest request){
         SqlFilter<Emp> sqlFilter = new SqlFilter<Emp>(request);
+        sqlFilter.addFilter("e.empno","asc",SqlFilter.FILTER_TYPE_ORDER);
 
         IPage<Emp> empIPage = empService.findBySqlFilter(sqlFilter);
 

@@ -39,7 +39,7 @@ public class SqlKeyword {
             return;
         }
         query.forEach((k, v) -> {
-            if (StringUtil.isBlank(k)
+            if (PlatStringUtil.isBlank(k)
                     || null == v
                     || k.endsWith(IGNORE)) {
                 return;

@@ -1,5 +1,8 @@
 package ${package.Service};
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.soft.fire.common.SqlFilter;
+
 import ${package.Entity}.${entity};
 import ${superServiceClassPackage};
 
@@ -15,6 +18,13 @@ import ${superServiceClassPackage};
 interface ${table.serviceName} : ${superServiceClass}<${entity}>
 <#else>
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+
+ /**
+     * 分页查询
+     * @param sqlFilter
+     * @return
+     */
+    IPage<${entity}> findBySqlFilter(SqlFilter sqlFilter);
 
 }
 </#if>

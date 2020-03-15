@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft.fire.platform.emp.mapper.EmpMapper;
 import com.soft.fire.platform.emp.model.Emp;
-import com.soft.fire.util.SqlFilter;
+import com.soft.fire.common.SqlFilter;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

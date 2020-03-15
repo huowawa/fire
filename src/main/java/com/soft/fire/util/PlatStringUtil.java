@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  * @version: 1.0
  * @date 2020-03-14 22:03
  */
-public class StringUtil extends org.springframework.util.StringUtils {
+public class PlatStringUtil extends org.springframework.util.StringUtils {
     /**
      * 生成的随机数只有数字
      */
@@ -51,7 +51,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @see Character#isWhitespace
      */
     public static boolean isBlank(final CharSequence cs) {
-        return !StringUtil.hasText(cs);
+        return !PlatStringUtil.hasText(cs);
     }
 
     /**
@@ -70,7 +70,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @see Character#isWhitespace
      */
     public static boolean isNotBlank(final CharSequence cs) {
-        return StringUtil.hasText(cs);
+        return PlatStringUtil.hasText(cs);
     }
 
     /**
@@ -83,7 +83,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
         if (null == css) {
             return true;
         }
-        return Stream.of(css).anyMatch(StringUtil::isBlank);
+        return Stream.of(css).anyMatch(PlatStringUtil::isBlank);
     }
 
     /**
@@ -96,7 +96,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
         if (null == css) {
             return false;
         }
-        return Stream.of(css).allMatch(StringUtil::isNotBlank);
+        return Stream.of(css).allMatch(PlatStringUtil::isNotBlank);
     }
 
     /**
@@ -126,7 +126,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return the delimited {@code String}
      */
     public static String join(Collection<?> coll) {
-        return StringUtil.collectionToCommaDelimitedString(coll);
+        return PlatStringUtil.collectionToCommaDelimitedString(coll);
     }
 
     /**
@@ -138,7 +138,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return the delimited {@code String}
      */
     public static String join(Collection<?> coll, String delim) {
-        return StringUtil.collectionToDelimitedString(coll, delim);
+        return PlatStringUtil.collectionToDelimitedString(coll, delim);
     }
 
     /**
@@ -150,7 +150,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return the delimited {@code String}
      */
     public static String join(Object[] arr) {
-        return StringUtil.arrayToCommaDelimitedString(arr);
+        return PlatStringUtil.arrayToCommaDelimitedString(arr);
     }
 
     /**
@@ -162,7 +162,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return the delimited {@code String}
      */
     public static String join(Object[] arr, String delim) {
-        return StringUtil.arrayToDelimitedString(arr, delim);
+        return PlatStringUtil.arrayToDelimitedString(arr, delim);
     }
 
     /**
@@ -182,7 +182,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return {String}
      */
     public static String escapeHtml(String html) {
-        return StringUtil.isBlank(html) ? "" : HtmlUtils.htmlEscape(html);
+        return PlatStringUtil.isBlank(html) ? "" : HtmlUtils.htmlEscape(html);
     }
 
     /**
@@ -202,7 +202,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
      * @return 随机数
      */
     public static String random(int count) {
-        return StringUtil.random(count, RandomType.ALL);
+        return PlatStringUtil.random(count, RandomType.ALL);
     }
 
     /**
