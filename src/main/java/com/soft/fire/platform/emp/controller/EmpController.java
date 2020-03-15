@@ -6,9 +6,9 @@ package com.soft.fire.platform.emp.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.soft.fire.common.SqlFilter;
 import com.soft.fire.platform.emp.model.Emp;
 import com.soft.fire.platform.emp.service.EmpService;
-import com.soft.fire.common.SqlFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,7 +73,7 @@ public class EmpController {
     public String update(HttpServletRequest request) {
         Emp emp = new Emp();
         emp.setHiredate(new Timestamp(System.currentTimeMillis()));
-        emp.setSal(100);
+        emp.setSal(26000);
 
         /**
          * 根据条件更新需要使用 条件构造器  QueryWrapper或者 UpdateWrapper
@@ -86,11 +86,9 @@ public class EmpController {
          * 或者
          */
         UpdateWrapper<Emp> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.set("sal", 9999).set("hiredate", new Timestamp(System.currentTimeMillis()))
-                .eq("ename", "fire2").ge("sal", 200);
+        updateWrapper.eq("ename", "fire2");
 
-        boolean result = empService.update(updateWrapper);
-
+        boolean result = empService.update(emp,updateWrapper);
 
 
         logger.info("the exec result is {}", result + "");
@@ -98,34 +96,46 @@ public class EmpController {
     }
 
     @RequestMapping("/remove")
-    public  String remove(HttpServletRequest request){
+    public String remove(HttpServletRequest request) {
         QueryWrapper<Emp> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("ename","fire2");
+        queryWrapper.eq("ename", "fire2");
 
         boolean result = empService.remove(queryWrapper);
 
 
-        return "success"+result;
+        return "success" + result;
     }
 
     /**
      * 分页查询
+     *
      * @param request
      * @return
      */
     @RequestMapping("/pages")
-    public IPage<Emp>  selectPage(HttpServletRequest request){
+    public IPage<Emp> selectPage(HttpServletRequest request) {
         SqlFilter<Emp> sqlFilter = new SqlFilter<Emp>(request);
-        sqlFilter.addFilter("e.empno","asc",SqlFilter.FILTER_TYPE_ORDER);
+        sqlFilter.addFilter("e.empno", "asc", SqlFilter.FILTER_TYPE_ORDER);
 
         IPage<Emp> empIPage = empService.findBySqlFilter(sqlFilter);
 
-        logger.info("数据总条数:"+empIPage.getTotal());
-        logger.info("数据总页数："+empIPage.getPages());
-        String col = "Q_T.USER_NAME_EQUAL";
-        logger.info("random：{}", col.substring(col.indexOf("_")+1 ,
-                col.lastIndexOf("_")));
+
+        logger.info("数据总条数:" + empIPage.getTotal());
+        logger.info("数据总页数：" + empIPage.getPages());
+
         return empIPage;
+    }
+
+    @RequestMapping("list")
+    public List<Emp> listEmp(HttpServletRequest request) {
+
+        QueryWrapper<Emp> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("deptno",20);
+        queryWrapper.select("empno,ename,job,deptno");
+
+        Emp emp = new Emp();
+
+        return emp.selectList(queryWrapper);
     }
 
 }

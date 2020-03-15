@@ -4,10 +4,12 @@
 package com.soft.fire.platform.emp.model;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.ibatis.type.JdbcType;
 
 import java.sql.Timestamp;
 
@@ -22,8 +24,8 @@ import java.sql.Timestamp;
 @Getter
 @ToString
 @TableName("EMP")
-@KeySequence("EMP_SEQUENCE")
-public class Emp {
+@KeySequence(value = "EMP_SEQUENCE",clazz = Long.class)
+public class Emp extends Model<Emp> {
     /**
      * 员工编号
      */
@@ -71,5 +73,16 @@ public class Emp {
      */
     @TableField(exist = false)
     private String dname;
+
+    /**
+     * 创建时间
+     */
+    @TableField(value = "CREATE_TIME" ,fill = FieldFill.INSERT,jdbcType = JdbcType.TIMESTAMP)
+    private Timestamp createTime;
+    /**
+     * 更新时间
+     */
+    @TableField(value = "UPDATE_TIME",fill = FieldFill.UPDATE,jdbcType = JdbcType.TIMESTAMP)
+    private Timestamp updateTime;
 
 }

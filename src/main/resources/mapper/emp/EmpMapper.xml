@@ -17,12 +17,12 @@
           <result column="emp_address" property="empAddress" jdbcType="VARCHAR"/>
       </resultMap>-->
 
-    <select id="getByEmpno" resultType="Emp">
-        SELECT  e.* FROM emp e WHERE e.empno=#{empno}
+    <select id="getByEmpno" resultType="com.soft.fire.platform.emp.model.Emp">
+        SELECT  e.empno,e.ename,e.job FROM emp e WHERE e.empno=#{empno}
     </select>
 
     <select id="selectPageInfo" resultType="Emp">
-          select  e.*,d.dname  from emp e
+          select   e.empno,e.ename empname,e.job,d.dname  from emp e
            left join dept d on e.deptno = d.deptno
            ${ew.customSqlSegment}
     </select>

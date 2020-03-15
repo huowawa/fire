@@ -84,6 +84,7 @@ public class Condition {
         QueryWrapper<T> qw = new QueryWrapper<>();
         //qw.setEntity(BeanUtil.newInstance(clazz));
         SqlKeyword.buildCondition(query, qw);
+
         return qw;
     }
 }
