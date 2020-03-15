@@ -66,5 +66,10 @@ public class Emp {
      */
     @TableField(exist = false)
     private String empAddress;
+    /**
+     * 部门名称
+     */
+    @TableField(exist = false)
+    private String dname;
 
 }

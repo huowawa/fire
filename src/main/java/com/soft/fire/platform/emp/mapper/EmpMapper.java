@@ -3,8 +3,13 @@
  */
 package com.soft.fire.platform.emp.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.soft.fire.platform.emp.model.Emp;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 员工数据操作
@@ -20,4 +25,12 @@ public interface EmpMapper  extends BaseMapper<Emp> {
      * @return
      */
     Emp getByEmpno(String empno);
+
+    /**
+     * 分页查询
+     * @param page
+     * @param queryWrapper
+     * @return
+     */
+    IPage<Emp> selectPageInfo(Page<Emp> page,  @Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 }

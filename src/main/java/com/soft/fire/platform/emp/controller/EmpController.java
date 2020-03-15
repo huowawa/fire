@@ -5,8 +5,11 @@ package com.soft.fire.platform.emp.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.soft.fire.platform.emp.model.Emp;
 import com.soft.fire.platform.emp.service.EmpService;
+import com.soft.fire.util.SqlFilter;
+import com.soft.fire.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,4 +108,24 @@ public class EmpController {
 
         return "success"+result;
     }
+
+    /**
+     * 分页查询
+     * @param request
+     * @return
+     */
+    @RequestMapping("/pages")
+    public IPage<Emp>  selectPage(HttpServletRequest request){
+        SqlFilter<Emp> sqlFilter = new SqlFilter<Emp>(request);
+
+        IPage<Emp> empIPage = empService.findBySqlFilter(sqlFilter);
+
+        logger.info("数据总条数:"+empIPage.getTotal());
+        logger.info("数据总页数："+empIPage.getPages());
+        String col = "Q_T.USER_NAME_EQUAL";
+        logger.info("random：{}", col.substring(col.indexOf("_")+1 ,
+                col.lastIndexOf("_")));
+        return empIPage;
+    }
+
 }

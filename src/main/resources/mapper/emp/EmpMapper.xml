@@ -3,22 +3,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.soft.fire.platform.emp.mapper.EmpMapper">
 
-  <!--  <resultMap id="BaseResultMap" type="Emp">
+    <!--  <resultMap id="BaseResultMap" type="Emp">
 
-        <id column="empno" property="empno" jdbcType="DOUBLE"/>
+          <id column="empno" property="empno" jdbcType="DOUBLE"/>
 
-        <result column="ename" property="ename" jdbcType="VARCHAR"/>
-        <result column="job" property="job" jdbcType="VARCHAR"/>
-        <result column="mgr" property="mgr" jdbcType="DOUBLE"/>
-        <result column="hiredate" property="hiredate" jdbcType="TIMESTAMP"/>
-        <result column="sal" property="sal" jdbcType="DOUBLE"/>
-        <result column="comm" property="comm" jdbcType="DOUBLE"/>
-        <result column="deptno" property="deptno" jdbcType="DOUBLE"/>
-        <result column="emp_address" property="empAddress" jdbcType="VARCHAR"/>
-    </resultMap>-->
+          <result column="ename" property="ename" jdbcType="VARCHAR"/>
+          <result column="job" property="job" jdbcType="VARCHAR"/>
+          <result column="mgr" property="mgr" jdbcType="DOUBLE"/>
+          <result column="hiredate" property="hiredate" jdbcType="TIMESTAMP"/>
+          <result column="sal" property="sal" jdbcType="DOUBLE"/>
+          <result column="comm" property="comm" jdbcType="DOUBLE"/>
+          <result column="deptno" property="deptno" jdbcType="DOUBLE"/>
+          <result column="emp_address" property="empAddress" jdbcType="VARCHAR"/>
+      </resultMap>-->
 
     <select id="getByEmpno" resultType="Emp">
         SELECT  e.* FROM emp e WHERE e.empno=#{empno}
     </select>
 
+    <select id="selectPageInfo" resultType="Emp">
+          select  e.*,d.dname  from emp e
+           left join dept d on e.deptno = d.deptno
+           ${ew.customSqlSegment}
+    </select>
 </mapper>

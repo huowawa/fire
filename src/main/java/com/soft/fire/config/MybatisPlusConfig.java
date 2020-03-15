@@ -6,6 +6,7 @@ package com.soft.fire.config;
 import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.incrementer.OracleKeyGenerator;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,6 +21,11 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisPlusConfig {
 
     @Bean
+    public PaginationInterceptor paginationInterceptor(){
+        return new PaginationInterceptor();
+    }
+
+    @Bean
     public IdentifierGenerator idGenerator() {
         //自定义ID生成器
         return new CustomIdGenerator();
@@ -29,4 +35,6 @@ public class MybatisPlusConfig {
     public IKeyGenerator keyGenerator(){
         return new OracleKeyGenerator();
     }
+
+
 }

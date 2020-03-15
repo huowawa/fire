@@ -3,8 +3,10 @@
  */
 package com.soft.fire.platform.emp.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft.fire.platform.emp.model.Emp;
+import com.soft.fire.util.SqlFilter;
 
 import java.util.List;
 import java.util.Map;
@@ -50,4 +52,13 @@ public interface EmpService extends IService<Emp> {
      * @return
      */
     int removeEmp(Emp emp);
+
+    /**
+     *
+     * @return
+     */
+    IPage<Emp> selectPage();
+
+    IPage<Emp> findBySqlFilter(SqlFilter sqlFilter);
+
 }
