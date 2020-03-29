@@ -9,14 +9,17 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.soft.fire.common.SqlFilter;
 import com.soft.fire.platform.emp.model.Emp;
 import com.soft.fire.platform.emp.service.EmpService;
+import com.soft.fire.platform.emp.vo.EmpVo;
+import org.hibernate.validator.constraints.Length;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.BeanUtils;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -28,6 +31,7 @@ import java.util.List;
  * @date 2019-03-17 11:29
  */
 @RestController
+@Validated
 public class EmpController {
 
     /**
@@ -40,6 +44,15 @@ public class EmpController {
     @Resource
     private EmpService empService;
 
+    @RequestMapping("/auth")
+    public String authorization(@Length(min = 11,message = "Clientid长度至少11位") @RequestParam("clientid") String clientid,
+                                @NotBlank(message = "口令不能为空") @RequestParam("pass") String pass) {
+        if ("admin".equals(clientid) && "11111111".equals(pass)) {
+            return "success";
+        }
+        return "error";
+    }
+
     @GetMapping("/empall")
     public List<Emp> findAll(HttpServletRequest request) {
         return empService.list(null);
@@ -50,14 +63,16 @@ public class EmpController {
         return empService.getByEmpno("592");
     }
 
-    @GetMapping("/saveemp")
-    public Integer saveEmp(HttpServletRequest request) {
+    /**
+     * 保存雇员信息
+     *
+     * @param empVo
+     * @return
+     */
+    @PostMapping("/saveemp")
+    public Integer saveEmp(@RequestBody @Validated EmpVo empVo) {
         Emp emp = new Emp();
-        emp.setEmpname("fire2");
-        emp.setJob("程序员");
-        emp.setHiredate(new Timestamp(System.currentTimeMillis()));
-        emp.setSal(20000);
-        emp.setComm(40000);
+        BeanUtils.copyProperties(empVo, emp);
         return empService.saveEmp(emp);
     }
 
@@ -88,7 +103,7 @@ public class EmpController {
         UpdateWrapper<Emp> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("ename", "fire2");
 
-        boolean result = empService.update(emp,updateWrapper);
+        boolean result = empService.update(emp, updateWrapper);
 
 
         logger.info("the exec result is {}", result + "");
@@ -130,7 +145,7 @@ public class EmpController {
     public List<Emp> listEmp(HttpServletRequest request) {
 
         QueryWrapper<Emp> queryWrapper = new QueryWrapper();
-        queryWrapper.eq("deptno",20);
+        queryWrapper.eq("deptno", 20);
         queryWrapper.select("empno,ename,job,deptno");
 
         Emp emp = new Emp();
