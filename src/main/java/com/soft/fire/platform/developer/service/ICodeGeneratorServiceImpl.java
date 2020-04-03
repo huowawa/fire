@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.soft.fire.config.OracleProperties;
 import com.soft.fire.platform.developer.model.CodeGenerator;
-import com.soft.fire.util.FreemarkerTemplateEngine;
+import com.soft.fire.utils.FreemarkerTemplateEngine;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -216,7 +216,7 @@ public class ICodeGeneratorServiceImpl implements ICodeGeneratorService {
         globalConfig.setBaseColumnList(true);
         //是否生成完成后打开资源管理器
         globalConfig.setOpen(true);
-        //日期类型的字段使用哪个类型，默认是 java8的 日期类型，此处改为 java.util.date
+        //日期类型的字段使用哪个类型，默认是 java8的 日期类型，此处改为 java.utils.date
         globalConfig.setDateType(DateType.ONLY_DATE);
 
         //生成的Service 接口类名是否以I开头

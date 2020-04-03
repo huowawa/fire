@@ -1,7 +1,7 @@
 /*
  * Copyright (c)
  */
-package com.soft.fire.util;
+package com.soft.fire.utils;
 
 import org.springframework.web.util.HtmlUtils;
 import org.springframework.util.Assert;

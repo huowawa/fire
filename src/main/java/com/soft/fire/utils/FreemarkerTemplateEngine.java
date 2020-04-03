@@ -1,7 +1,7 @@
 /*
  * Copyright (c)
  */
-package com.soft.fire.util;
+package com.soft.fire.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.config.ConstVal;

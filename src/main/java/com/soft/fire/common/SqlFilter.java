@@ -4,9 +4,9 @@
 package com.soft.fire.common;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.soft.fire.util.Condition;
-import com.soft.fire.util.PlatStringUtil;
-import com.soft.fire.util.SqlKeyword;
+import com.soft.fire.utils.Condition;
+import com.soft.fire.utils.PlatStringUtil;
+import com.soft.fire.utils.SqlKeyword;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;

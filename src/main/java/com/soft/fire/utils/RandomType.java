@@ -1,4 +1,4 @@
-package com.soft.fire.util;
+package com.soft.fire.utils;
 
 /**
  * 随机数类别

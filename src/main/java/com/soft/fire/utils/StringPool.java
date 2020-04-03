@@ -1,7 +1,7 @@
 /*
  * Copyright (c)
  */
-package com.soft.fire.util;
+package com.soft.fire.utils;
 
 /**
  * 静态字符串

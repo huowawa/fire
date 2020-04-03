@@ -1,7 +1,7 @@
 /*
  * Copyright (c)
  */
-package com.soft.fire.util;
+package com.soft.fire.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

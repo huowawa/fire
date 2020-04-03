@@ -4,13 +4,8 @@
 package com.soft.fire.config;
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
-import com.soft.fire.util.PlatStringUtil;
+import com.soft.fire.utils.PlatStringUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.reflection.MetaObject;
-import org.apache.ibatis.reflection.SystemMetaObject;
-import org.springframework.stereotype.Component;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 自定义ID生成器
