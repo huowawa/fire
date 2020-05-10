@@ -3,9 +3,11 @@
  */
 package com.soft.fire.platform.emp.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.soft.fire.annotation.MyAge;
 import com.soft.fire.annotation.MyDeptNo;
+import com.soft.fire.platform.dept.vo.DeptVo;
 import com.soft.fire.validator.CreateGroup;
 import com.soft.fire.validator.PayLoadLevel;
 import com.soft.fire.validator.UpdateGroup;
@@ -39,7 +41,7 @@ public class EmpVo {
      */
     @NotBlank(groups = {CreateGroup.class, UpdateGroup.class})
     @Length(groups = {CreateGroup.class, UpdateGroup.class}, min = 3, max = 10)
-    private String empname;
+    private String ename;
     /**
      * 工作岗位
      */
@@ -76,7 +78,7 @@ public class EmpVo {
     /**
      * 部门名称
      */
-    private String dname;
+    private String empDeptName;
 
     /**
      * 创建时间
@@ -89,5 +91,9 @@ public class EmpVo {
      */
     @NotNull(groups = {UpdateGroup.class})
     @FutureOrPresent(groups = {UpdateGroup.class}, message = "更新时间必须是当前或者将来时间!!")
-    private Timestamp updateTime;
+    private String updateTime;
+
+    private String remark;
+
+    private DeptVo deptVo;
 }

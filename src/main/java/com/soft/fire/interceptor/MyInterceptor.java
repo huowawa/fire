@@ -3,12 +3,15 @@
  */
 package com.soft.fire.interceptor;
 
+import com.soft.fire.annotation.ApiIdempotent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Method;
 
 /**
  * 自定义拦截器
@@ -20,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Slf4j
 public class MyInterceptor implements HandlerInterceptor {
+
+
     /**
      * 该方法将在请求处理之前被调用
      *
@@ -32,7 +37,16 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
-        log.error("自定义的拦截器调用了1");
+        if(!(handler instanceof HandlerMethod)){
+            return true;
+        }
+        HandlerMethod handlerMethod = (HandlerMethod)handler;
+        Method method = handlerMethod.getMethod();
+        ApiIdempotent annotation = method.getAnnotation(ApiIdempotent.class);
+        if(null != annotation){
+            log.info("效验接口!!!");
+        }
+        //log.info("自定义的拦截器调用了1");
         return true;
     }
 
@@ -49,7 +63,6 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
                            Object handler, ModelAndView modelAndView) throws Exception {
-        log.error("自定义的拦截器调用了2");
     }
 
     /**

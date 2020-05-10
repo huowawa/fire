@@ -3,6 +3,7 @@
  */
 package com.soft.fire.common;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -27,7 +28,7 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
     public boolean supports(MethodParameter methodParameter,
                             Class<? extends HttpMessageConverter<?>> aClass) {
 
-        log.info("返回的类型为：{}", methodParameter.getGenericParameterType().getTypeName());
+        //log.info("返回的类型为：{}", methodParameter.getGenericParameterType().getTypeName());
         // 如果接口返回的类型本身就是Result那就没有必要进行额外的操作，返回false
         return !methodParameter.getGenericParameterType().getTypeName()
                 .equals("com.soft.fire.common.Result<java.lang.String>");
@@ -35,6 +36,14 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object object, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+        if(methodParameter.getGenericParameterType().getTypeName().equals("java.lang.String")){
+            //String类型不能直接包装，所以要进行些特别的处理 会报java.lang.ClassCastException
+            Result result = new Result(object);
+            // 将数据包装在Result里后，再转换为json字符串响应给客户端
+            return JSON.toJSONString(result);
+        }
         return new Result<>(object);
     }
+
+
 }

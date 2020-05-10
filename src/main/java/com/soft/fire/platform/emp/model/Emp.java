@@ -6,6 +6,7 @@ package com.soft.fire.platform.emp.model;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.soft.fire.platform.dept.model.Dept;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -53,7 +54,6 @@ public class Emp extends Model<Emp> {
     /**
      * 薪水  查询的时候不返回这个字段值
      */
-    @TableField(select = false)
     private double sal;
     /**
      * 奖金
@@ -84,5 +84,32 @@ public class Emp extends Model<Emp> {
      */
     @TableField(value = "UPDATE_TIME",fill = FieldFill.UPDATE,jdbcType = JdbcType.TIMESTAMP)
     private Timestamp updateTime;
+
+    @TableField(exist = false)
+    private String remark;
+
+    /**
+     * 所在部门
+     */
+    @TableField(exist = false)
+    private Dept dept;
+
+    /**
+     * 判断是否20部门
+     * @param emp
+     * @return
+     */
+    public static boolean isDeptNo(Emp emp){
+        return 20L == emp.getDeptno();
+    }
+
+    /**
+     * 判断薪水是否大于15K
+     * @param emp
+     * @return
+     */
+    public static boolean isSale(Emp emp){
+        return emp.getSal()>15000;
+    }
 
 }

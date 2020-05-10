@@ -30,7 +30,7 @@ public class ValidationTest {
     @Test
     public void testEmpvo() {
         EmpVo empVo = new EmpVo();
-        empVo.setEmpname("smith");
+        empVo.setEname("smith");
         empVo.setAge(0);
         empVo.setSal(30000);
         empVo.setSal(-1L);
@@ -60,7 +60,7 @@ public class ValidationTest {
     @Test
     public void testSave(){
         EmpVo empVo = new EmpVo();
-        empVo.setEmpname("sm");
+        empVo.setEname("sm");
         empVo.setAge(29);
         empVo.setSal(-1);
        // empVo.setDeptno(50);

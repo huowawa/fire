@@ -46,15 +46,15 @@ public class CodeGeneratorController {
         codeGenerator.setEnableTableFieldAnnotation(true);
         codeGenerator.setServiceClassNameStartWithI(true);
         codeGenerator.setProjectPath(System.getProperty("user.dir"));
-        codeGenerator.setModuleName("system");
+        codeGenerator.setModuleName("dept");
         codeGenerator.setEntityModuleName("model");
         codeGenerator.setMapperModuleName("mapper");
 
         List<String> tableList = new ArrayList<>();
-        tableList.add("PLAT_SYSTEM_SYSUSER");
+        tableList.add("DEPT");
 
         codeGenerator.setTableNames(tableList);
-        codeGenerator.setTablePrefix("PLAT_SYSTEM_");
+        codeGenerator.setTablePrefix("");
 
         codeGenerator.setFieldPrefix(new ArrayList<>());
 
