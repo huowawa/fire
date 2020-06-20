@@ -3,7 +3,6 @@
  */
 package com.soft.fire.platform.emp.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.soft.fire.annotation.MyAge;
 import com.soft.fire.annotation.MyDeptNo;
@@ -17,7 +16,6 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.*;
-import javax.validation.groups.Default;
 import java.sql.Timestamp;
 
 /**

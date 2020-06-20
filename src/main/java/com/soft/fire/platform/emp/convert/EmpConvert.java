@@ -8,12 +8,9 @@ import com.soft.fire.platform.dept.vo.DeptVo;
 import com.soft.fire.platform.emp.model.Emp;
 import com.soft.fire.platform.emp.vo.EmpVo;
 import com.soft.fire.platform.system.model.Sysuser;
-import com.soft.fire.platform.system.vo.SysuserVo;
 import com.soft.fire.utils.PlatStringUtil;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * 员工映射器接口
